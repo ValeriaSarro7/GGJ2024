@@ -11,6 +11,7 @@ public class GameManager : StateController
     public int currentTries = 10;
     public AudioSource music;
 
+    public int lastResult = 0;
 
     public AudioManager audioManager;
     public CrowdController crowdController;
@@ -60,6 +61,9 @@ public class GameManager : StateController
                 result += 1;
             }
         }
+
+        lastResult = result;
+
         if (result >= 6 ) 
         {
             youWin = true;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Newtonsoft.Json.Linq;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class DialogueSystem : MonoBehaviour
     public Button nextButton;
     public int currentDialogue = -1;
     public float textSpeed = 100f;
+
+    public AudioSource audioSourceProgressBar1;
+    public AudioSource audioSourceProgressBar2;
 
     private void Start()
     {
@@ -81,6 +85,17 @@ public class DialogueSystem : MonoBehaviour
             boxGameObject.SetActive(true);
             ClearText();
             ToggleBox();
+
+            int value = gameManager.lastResult;
+            if (value >= 1)
+            {
+                audioSourceProgressBar1.pitch = Random.Range(-2, 3);
+                audioSourceProgressBar1.Play();
+            }
+            else
+            {
+                audioSourceProgressBar2.Play();
+            }
 
             if (gameManager.youWin)
             {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteInEditMode]
 public class ProgressBar : MonoBehaviour
 {
     public float maximun;
@@ -12,7 +11,6 @@ public class ProgressBar : MonoBehaviour
     public Image fill;
     public Color color;
     public Gradient gradient;
-
 
     void Start()
     {
@@ -26,7 +24,7 @@ public class ProgressBar : MonoBehaviour
 
     void CurrentFill()
     {
-        if(value <= 6)
+        if (value <= 6)
         {
             float fillAmount = (float)value / (float)maximun;
             mask.fillAmount = fillAmount / 2;
