@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class UIController : MonoBehaviour
     public GameObject InputPanel;
     public ProgressBar ProgressBar;
     public DialogueSystem dialogueBox;
+
+    public TMP_Text triesText;
+
+    public GameObject gameOverScreen;
+    public GameObject winScreen;
 
     void Start()
     {
@@ -67,6 +73,23 @@ public class UIController : MonoBehaviour
         }
         return null;
     }
+
+    public void UpdateTries(int value)
+    {
+        triesText.text = value.ToString();
+    }
+
+    public void SetActiveWinScreen(bool value)
+    {
+        SetActiveInputPanel(false);
+        winScreen.SetActive(value);
+    }
+    public void SetActiveGameOverScreen(bool value)
+    {
+        SetActiveInputPanel(false);
+        gameOverScreen.SetActive(value);
+    }
+
     public void SetActiveInputPanel(bool value)
     {
         InputPanel.SetActive(value);

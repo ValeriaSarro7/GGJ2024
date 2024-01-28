@@ -6,6 +6,9 @@ using UnityEngine.InputSystem.XR;
 
 public class GameManager : StateController
 {
+    public int maxTries = 10;
+    public int currentTries = 10;
+
     public CrowdController crowdController;
     public InputController inputController;
     public JokeController jokeController;
@@ -44,10 +47,37 @@ public class GameManager : StateController
             }
         }
 
-        uiController.StartDialogue(jokeController.GetJokeList(jokeInput));
+        currentTries--;
+        uiController.UpdateTries(currentTries);
+        if (result >= 6) 
+        {
+            uiController.SetActiveWinScreen(true);
+        }
+        else if (currentTries <= 0)
+        {
+            uiController.SetActiveGameOverScreen(true);
+        }
 
+        uiController.StartDialogue(jokeController.GetJokeList(jokeInput));
         uiController.ProgressBar.value = result;
+
         //Debug.LogWarning("RESULT _" + result.ToString());
+    }
+
+    public void ShowGameOverScreen() 
+    {
+    }
+
+    public void ShowWinScreen() 
+    {
+    }
+
+    public void ResetGame()
+    {
+        scenarioCamera.enabled = true;
+        jokeCamera.enabled = false;
+        currentTries = maxTries;
+        uiController.UpdateTries(currentTries);
     }
 
     public void SetActiveJokeCamera(bool value)
