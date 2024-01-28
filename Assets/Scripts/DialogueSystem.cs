@@ -8,7 +8,7 @@ public class DialogueSystem : MonoBehaviour
 {
     public GameObject boxGameObject;
     public TMP_Text textLabel;
-    public List<string> dialogues;
+    public List<JokeItem> dialogues;
     public Button nextButton;
     public int currentDialogue = -1;
     public float textSpeed = 100f;
@@ -57,13 +57,22 @@ public class DialogueSystem : MonoBehaviour
     public void ShowNextDialogue()
     {
         GameManager gameManager = (GameManager)GameManager.instance;
-        
+        AudioManager audioManager = gameManager.audioManager;
+        audioManager.source.Stop();
+
         currentDialogue++;
         if (dialogues.Count > currentDialogue)
         {
             gameManager.SetActiveJokeCamera(true);
             gameManager.SetActiveInputPanel(false);
-            SetText(dialogues[currentDialogue]);
+
+            SetText(dialogues[currentDialogue].text);
+
+            if (dialogues[currentDialogue].clip) 
+            {
+                audioManager.source.PlayOneShot(dialogues[currentDialogue].clip);
+            }
+
         }
         else
         {

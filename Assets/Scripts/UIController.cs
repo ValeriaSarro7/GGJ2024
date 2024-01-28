@@ -109,7 +109,7 @@ public class UIController : MonoBehaviour
         dialogueBox.ToggleBox();
     }
 
-    public void StartDialogue(List<string> dialogues)
+    public void StartDialogue(List<JokeItem> dialogues)
     {
         dialogueBox.ToggleBox();
         dialogueBox.dialogues = dialogues;

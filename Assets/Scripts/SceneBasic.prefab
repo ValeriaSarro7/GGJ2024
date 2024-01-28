@@ -1307,9 +1307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75fa43fc364b374aa129942e0db54e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introAudioClips: []
-  middleAudioClips: []
-  finalAudioClips: []
+  mixer: {fileID: 0}
+  source: {fileID: 0}
 --- !u!1 &1865801024329770424
 GameObject:
   m_ObjectHideFlags: 0
@@ -2941,6 +2940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTries: 10
   currentTries: 10
+  audioManager: {fileID: 7386010603745614776}
   crowdController: {fileID: 2737591967101264013}
   inputController: {fileID: 5902484662334850947}
   jokeController: {fileID: 9179676473767438260}
@@ -5983,7 +5983,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxGameObject: {fileID: 3377572365400776141}
   textLabel: {fileID: 8963631247989747280}
-  dialogues: []
   nextButton: {fileID: 878814735558502449}
   currentDialogue: -1
   textSpeed: 100
