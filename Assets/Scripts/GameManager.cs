@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem.XR;
+using Unity.VisualScripting;
 
 public class GameManager : StateController
 {
@@ -19,6 +20,16 @@ public class GameManager : StateController
     public CinemachineVirtualCamera jokeCamera;
     public CinemachineBrain cinemachineBrain;
     List<JokeCategory> bestJoke = null;
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            Debug.Log("Quit");
+            Application.Quit();
+        }
+    }
 
     void Start()
     {
@@ -48,11 +59,7 @@ public class GameManager : StateController
             }
         }
 
-        if (result >= 6)
-        {
-            uiController.SetActiveWinScreen(true);
-        }
-        else if (currentTries < 0)
+        if (currentTries < 0)
         {
             uiController.SetActiveGameOverScreen(true);
         }
@@ -91,9 +98,4 @@ public class GameManager : StateController
         jokeCamera.enabled = !jokeCamera.enabled;
     }
 
-    IEnumerator ToggleCameraAfterSeconds(int value) 
-    {
-        yield return new WaitForSeconds(value);
-        ToggleCamera();
-    }
 }
