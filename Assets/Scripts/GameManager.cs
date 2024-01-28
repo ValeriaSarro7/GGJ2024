@@ -44,7 +44,7 @@ public class GameManager : StateController
         scenarioCamera.enabled = true;
         jokeCamera.enabled = false;
 
-        //Debug.LogWarning("GANADOR "+bestJoke[0] + " - "+ bestJoke[1] + " - " + bestJoke[2]);
+        Debug.LogWarning("GANADOR "+bestJoke[0] + " - "+ bestJoke[1] + " - " + bestJoke[2]);
     }
     public void OnSubmit(List<JokeCategory> jokeInput)
     {
@@ -67,6 +67,7 @@ public class GameManager : StateController
         else if (currentTries <= 0)
         {
             uiController.SetActiveGameOverScreen(true);
+            return;
         }
 
         currentTries--;
