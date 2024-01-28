@@ -9,6 +9,7 @@ public class GameManager : StateController
     public int maxTries = 10;
     public int currentTries = 10;
 
+    public AudioManager audioManager;
     public CrowdController crowdController;
     public InputController inputController;
     public JokeController jokeController;
@@ -25,7 +26,7 @@ public class GameManager : StateController
         bestJoke = crowdController.GetBestJoke();
         string joke = jokeController.GetFullJoke(bestJoke[0], bestJoke[1], bestJoke[2]);
         //print(joke);
-
+        uiController.UpdateTries(currentTries);
         scenarioCamera.enabled = true;
         jokeCamera.enabled = false;
 
@@ -47,29 +48,23 @@ public class GameManager : StateController
             }
         }
 
-        currentTries--;
-        uiController.UpdateTries(currentTries);
-        if (result >= 6) 
+        if (result >= 6)
         {
             uiController.SetActiveWinScreen(true);
         }
-        else if (currentTries <= 0)
+        else if (currentTries < 0)
         {
             uiController.SetActiveGameOverScreen(true);
         }
+
+        currentTries--;
+        uiController.UpdateTries(currentTries);
+
 
         uiController.StartDialogue(jokeController.GetJokeList(jokeInput));
         uiController.ProgressBar.value = result;
 
         //Debug.LogWarning("RESULT _" + result.ToString());
-    }
-
-    public void ShowGameOverScreen() 
-    {
-    }
-
-    public void ShowWinScreen() 
-    {
     }
 
     public void ResetGame()

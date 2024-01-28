@@ -4,6 +4,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+public struct JokeItem
+{
+    public string text;
+    public AudioClip clip;
+}
+
 public class JokeController : MonoBehaviour
 {
     Dictionary<JokeCategory,List<string>> introJokesDictionary = new Dictionary<JokeCategory, List<string>>();
@@ -14,19 +20,15 @@ public class JokeController : MonoBehaviour
     string middleAudiosFolderPath = "Voces/Situación";
     string finalAudiosFolderPath = "Voces/Finales";
 
-    Dictionary<JokeCategory, List<AudioClip>> introAudiosDictionary = new Dictionary<JokeCategory, List<AudioClip>>();
-    Dictionary<JokeCategory, List<AudioClip>> middleAudiosDictionary = new Dictionary<JokeCategory, List<AudioClip>>();
-    Dictionary<JokeCategory, List<AudioClip>> finalAudiosDictionary = new Dictionary<JokeCategory, List<AudioClip>>();
-
     public string GetFullJoke(JokeCategory introCategory, JokeCategory middleCategory, JokeCategory finalCategory) 
     {
         string result = "";
         result = GetJokeSectionByIndex(1, introCategory)+ " " + GetJokeSectionByIndex(2, middleCategory) + " " + GetJokeSectionByIndex(3, finalCategory); 
         return result;
     }
-    public List<string> GetJokeList(List<JokeCategory> categories)
+    public List<JokeItem> GetJokeList(List<JokeCategory> categories)
     {
-        List<string> result = new List<string>();
+        List<JokeItem> result = new List<JokeItem>();
         for (int i = 0; i < categories.Count; i++)
         {
             result.Add(GetJokeSectionByIndex(i+1, categories[i]));
@@ -35,28 +37,36 @@ public class JokeController : MonoBehaviour
         return result;
     }
 
-    public string GetJokeSectionByIndex(int index, JokeCategory category) 
+    public JokeItem GetJokeSectionByIndex(int index, JokeCategory category) 
     {
+        AudioManager audioManager = ((GameManager)GameManager.instance).audioManager;
         Dictionary<JokeCategory, List<string>> dictionary;
+        Dictionary<JokeCategory, List<AudioClip>> audioDictionary;
+        JokeItem result = new JokeItem();
 
         switch (index) 
         {
             case 1:
                 dictionary = introJokesDictionary;
+                audioDictionary = audioManager.introAudiosDictionary;
                 break;
             case 2:
                 dictionary = middleJokesDictionary;
+                audioDictionary = audioManager.middleAudiosDictionary;
                 break;
             case 3:
                 dictionary = finalJokesDictionary;
+                audioDictionary = audioManager.finalAudiosDictionary;
                 break;
             default:
-                return "";
+                return result;
         };
 
         int randomElement = Random.Range(0,dictionary[category].Count);
-        string jokeResult = dictionary[category][randomElement];
-        return jokeResult;
+        result.text = dictionary[category][randomElement];
+        result.clip = audioDictionary[category][randomElement];
+
+        return result;
     }
 
     public void ReadCSV()
@@ -76,20 +86,22 @@ public class JokeController : MonoBehaviour
         finalJokesDictionary.Add(JokeCategory.INFORMATICOS, new List<string>());
         finalJokesDictionary.Add(JokeCategory.BLANCOS, new List<string>());
 
-        introAudiosDictionary.Add(JokeCategory.NEGROS, new List<AudioClip>());
-        introAudiosDictionary.Add(JokeCategory.VERDES, new List<AudioClip>());
-        introAudiosDictionary.Add(JokeCategory.INFORMATICOS, new List<AudioClip>());
-        introAudiosDictionary.Add(JokeCategory.BLANCOS, new List<AudioClip>());
+        AudioManager audioManager = ((GameManager)GameManager.instance).audioManager;
 
-        middleAudiosDictionary.Add(JokeCategory.NEGROS, new List<AudioClip>());
-        middleAudiosDictionary.Add(JokeCategory.VERDES, new List<AudioClip>());
-        middleAudiosDictionary.Add(JokeCategory.INFORMATICOS, new List<AudioClip>());
-        middleAudiosDictionary.Add(JokeCategory.BLANCOS, new List<AudioClip>());
+        audioManager.introAudiosDictionary.Add(JokeCategory.NEGROS, new List<AudioClip>());
+        audioManager.introAudiosDictionary.Add(JokeCategory.VERDES, new List<AudioClip>());
+        audioManager.introAudiosDictionary.Add(JokeCategory.INFORMATICOS, new List<AudioClip>());
+        audioManager.introAudiosDictionary.Add(JokeCategory.BLANCOS, new List<AudioClip>());
 
-        finalAudiosDictionary.Add(JokeCategory.NEGROS, new List<AudioClip>());
-        finalAudiosDictionary.Add(JokeCategory.VERDES, new List<AudioClip>());
-        finalAudiosDictionary.Add(JokeCategory.INFORMATICOS, new List<AudioClip>());
-        finalAudiosDictionary.Add(JokeCategory.BLANCOS, new List<AudioClip>());
+        audioManager.middleAudiosDictionary.Add(JokeCategory.NEGROS, new List<AudioClip>());
+        audioManager.middleAudiosDictionary.Add(JokeCategory.VERDES, new List<AudioClip>());
+        audioManager.middleAudiosDictionary.Add(JokeCategory.INFORMATICOS, new List<AudioClip>());
+        audioManager.middleAudiosDictionary.Add(JokeCategory.BLANCOS, new List<AudioClip>());
+
+        audioManager.finalAudiosDictionary.Add(JokeCategory.NEGROS, new List<AudioClip>());
+        audioManager.finalAudiosDictionary.Add(JokeCategory.VERDES, new List<AudioClip>());
+        audioManager.finalAudiosDictionary.Add(JokeCategory.INFORMATICOS, new List<AudioClip>());
+        audioManager.finalAudiosDictionary.Add(JokeCategory.BLANCOS, new List<AudioClip>());
 
 
         var dataset = Resources.Load<TextAsset>("JokesTable3");
@@ -107,9 +119,15 @@ public class JokeController : MonoBehaviour
 
                 string path = introAudiosFolderPath + "/" + i.ToString("00");
                 AudioClip introClip = (Resources.Load(path) as AudioClip);
-                introAudiosDictionary[enumResult].Add(introClip);
-                middleAudiosDictionary[enumResult].Add((Resources.Load(middleAudiosFolderPath + "/" + i.ToString("00")) as AudioClip));
-                finalAudiosDictionary[enumResult].Add((Resources.Load(finalAudiosFolderPath + "/" + i.ToString("00")) as AudioClip));
+                audioManager.introAudiosDictionary[enumResult].Add(introClip);
+
+                path = middleAudiosFolderPath + "/" + i.ToString("00");
+                AudioClip middleClip = (Resources.Load(path) as AudioClip);
+                audioManager.middleAudiosDictionary[enumResult].Add(middleClip);
+
+                path = finalAudiosFolderPath + "/" + i.ToString("00");
+                AudioClip finalClip = (Resources.Load(path) as AudioClip);
+                audioManager.finalAudiosDictionary[enumResult].Add(finalClip);
             }
         }
     }
