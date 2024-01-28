@@ -3,7 +3,92 @@ guid: 0b2bca2ab6d37b34d98abcf09cd01dba
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CortinaDer
+    second: {fileID: 2100000, guid: b76adb93c5e12be4cbf13b84cde3b865, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CortinaIz
+    second: {fileID: 2100000, guid: 38f28d84bea18fa4399a7e14aa3498b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cuadro
+    second: {fileID: 2100000, guid: 9cc9a874eec2b4c4291db2026d0fbbfb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Focos_Abajo
+    second: {fileID: 2100000, guid: a60b2b6d5fee6174bafc89be13d901cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Focos_Sup
+    second: {fileID: 2100000, guid: 72910f32d6ab94448b488e167ef797ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Imagen02
+    second: {fileID: 2100000, guid: 78ead25ad416ad545a635e751cacf203, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Imagen04
+    second: {fileID: 2100000, guid: ca2f131d58d1d0c48bfca7a8d0da5c82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesas
+    second: {fileID: 2100000, guid: acbce88f5ddb8024dafc5cd98a7c97a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Micro
+    second: {fileID: 2100000, guid: 8f68844622458bf4ba1b6cb563b03ef8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pared
+    second: {fileID: 2100000, guid: 537261d5eca14cf4a884c92cee46d6a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Parlantes
+    second: {fileID: 2100000, guid: f507641f11d18f647ba75f22da6ac44a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Silla
+    second: {fileID: 2100000, guid: cdc5792fcd1ab934b96e882b11a3d624, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sillon.001
+    second: {fileID: 2100000, guid: 94ceae7cf57420841ae06191baba40de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Suelo
+    second: {fileID: 2100000, guid: 05a5abdbcfe4bbf4a9c39db84761123c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Techo
+    second: {fileID: 2100000, guid: 96939505ea168fb4eac4d2e3e6fef121, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: imagen03
+    second: {fileID: 2100000, guid: b60d30585d92ce546a5d89463bd6cbb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tablado
+    second: {fileID: 2100000, guid: f549e467951b5104bb98ecf8b39ece44, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
