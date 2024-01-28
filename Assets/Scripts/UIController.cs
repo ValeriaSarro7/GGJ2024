@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     public Button DeleteButton;
     public GameObject InputPanel;
     public ProgressBar ProgressBar;
+    public DialogueSystem dialogueBox;
 
     void Start()
     {
@@ -66,10 +67,35 @@ public class UIController : MonoBehaviour
         }
         return null;
     }
-
+    public void SetActiveInputPanel(bool value)
+    {
+        InputPanel.SetActive(value);
+    }
     public void ToggleInputPanel() 
     {
         InputPanel.SetActive(!InputPanel.activeSelf);
     }
 
- }
+    public void SetActiveDialogueBox(bool value)
+    {
+        dialogueBox.ToggleBox();
+    }
+
+    public void ToggleDialogueBox()
+    {
+        dialogueBox.ToggleBox();
+    }
+
+    public void StartDialogue(List<string> dialogues)
+    {
+        dialogueBox.ToggleBox();
+        dialogueBox.dialogues = dialogues;
+        dialogueBox.ShowNextDialogue();
+    }
+
+    public void OnClickNextText()
+    {
+        dialogueBox.ShowNextDialogue();
+    }
+
+}

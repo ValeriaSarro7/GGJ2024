@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SerializeField]
 public enum JokeCategory
 {
     NEGROS,
@@ -16,7 +17,3 @@ public struct InputResult
 {
     JokeCategory[] jokeCategories;
 };
-
-public struct JokeReception
-{
-}

@@ -6,23 +6,32 @@ using UnityEngine.UI;
 
 public class JokeController : MonoBehaviour
 {
-    public Dictionary<JokeCategory,List<string>> introJokesDictionary = new Dictionary<JokeCategory, List<string>>();
-    public Dictionary<JokeCategory,List<string>> middleJokesDictionary = new Dictionary<JokeCategory, List<string>>();
-    public Dictionary<JokeCategory,List<string>> finalJokesDictionary = new Dictionary<JokeCategory, List<string>>();
+    Dictionary<JokeCategory,List<string>> introJokesDictionary = new Dictionary<JokeCategory, List<string>>();
+    Dictionary<JokeCategory,List<string>> middleJokesDictionary = new Dictionary<JokeCategory, List<string>>();
+    Dictionary<JokeCategory,List<string>> finalJokesDictionary = new Dictionary<JokeCategory, List<string>>();
 
-    void Start()
-    {
-    }
+    string introAudiosFolderPath = "Voces/Inicios";
+    string middleAudiosFolderPath = "Voces/Situación";
+    string finalAudiosFolderPath = "Voces/Finales";
 
-    void Update()
-    {
-        
-    }
+    Dictionary<JokeCategory, List<AudioClip>> introAudiosDictionary = new Dictionary<JokeCategory, List<AudioClip>>();
+    Dictionary<JokeCategory, List<AudioClip>> middleAudiosDictionary = new Dictionary<JokeCategory, List<AudioClip>>();
+    Dictionary<JokeCategory, List<AudioClip>> finalAudiosDictionary = new Dictionary<JokeCategory, List<AudioClip>>();
 
     public string GetFullJoke(JokeCategory introCategory, JokeCategory middleCategory, JokeCategory finalCategory) 
     {
         string result = "";
         result = GetJokeSectionByIndex(1, introCategory)+ " " + GetJokeSectionByIndex(2, middleCategory) + " " + GetJokeSectionByIndex(3, finalCategory); 
+        return result;
+    }
+    public List<string> GetJokeList(List<JokeCategory> categories)
+    {
+        List<string> result = new List<string>();
+        for (int i = 0; i < categories.Count; i++)
+        {
+            result.Add(GetJokeSectionByIndex(i+1, categories[i]));
+        }
+
         return result;
     }
 
@@ -67,6 +76,22 @@ public class JokeController : MonoBehaviour
         finalJokesDictionary.Add(JokeCategory.INFORMATICOS, new List<string>());
         finalJokesDictionary.Add(JokeCategory.BLANCOS, new List<string>());
 
+        introAudiosDictionary.Add(JokeCategory.NEGROS, new List<AudioClip>());
+        introAudiosDictionary.Add(JokeCategory.VERDES, new List<AudioClip>());
+        introAudiosDictionary.Add(JokeCategory.INFORMATICOS, new List<AudioClip>());
+        introAudiosDictionary.Add(JokeCategory.BLANCOS, new List<AudioClip>());
+
+        middleAudiosDictionary.Add(JokeCategory.NEGROS, new List<AudioClip>());
+        middleAudiosDictionary.Add(JokeCategory.VERDES, new List<AudioClip>());
+        middleAudiosDictionary.Add(JokeCategory.INFORMATICOS, new List<AudioClip>());
+        middleAudiosDictionary.Add(JokeCategory.BLANCOS, new List<AudioClip>());
+
+        finalAudiosDictionary.Add(JokeCategory.NEGROS, new List<AudioClip>());
+        finalAudiosDictionary.Add(JokeCategory.VERDES, new List<AudioClip>());
+        finalAudiosDictionary.Add(JokeCategory.INFORMATICOS, new List<AudioClip>());
+        finalAudiosDictionary.Add(JokeCategory.BLANCOS, new List<AudioClip>());
+
+
         var dataset = Resources.Load<TextAsset>("JokesTable3");
         string[] dataLines = dataset.text.Split('\n');
 
@@ -79,6 +104,12 @@ public class JokeController : MonoBehaviour
                 introJokesDictionary[enumResult].Add(data[1]);
                 middleJokesDictionary[enumResult].Add(data[2]);
                 finalJokesDictionary[enumResult].Add(data[3]);
+
+                string path = introAudiosFolderPath + "/" + i.ToString("00");
+                AudioClip introClip = (Resources.Load(path) as AudioClip);
+                introAudiosDictionary[enumResult].Add(introClip);
+                middleAudiosDictionary[enumResult].Add((Resources.Load(middleAudiosFolderPath + "/" + i.ToString("00")) as AudioClip));
+                finalAudiosDictionary[enumResult].Add((Resources.Load(finalAudiosFolderPath + "/" + i.ToString("00")) as AudioClip));
             }
         }
     }

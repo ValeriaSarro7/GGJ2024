@@ -6,7 +6,7 @@ public class CrowdController : MonoBehaviour
 {
     List<JokeCategory> bestJoke = new List<JokeCategory>();
 
-    private void Start()
+    private void Awake()
     {
         GenerateBestJoke();
     }

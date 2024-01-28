@@ -21,16 +21,17 @@ public class GameManager : StateController
         jokeController.ReadCSV();
         bestJoke = crowdController.GetBestJoke();
         string joke = jokeController.GetFullJoke(bestJoke[0], bestJoke[1], bestJoke[2]);
-        print(joke);
+        //print(joke);
 
         scenarioCamera.enabled = true;
         jokeCamera.enabled = false;
 
-        Debug.LogWarning("GANADOR "+bestJoke[0] + " - "+ bestJoke[1] + " - " + bestJoke[2]);
+        //Debug.LogWarning("GANADOR "+bestJoke[0] + " - "+ bestJoke[1] + " - " + bestJoke[2]);
     }
     public void OnSubmit(List<JokeCategory> jokeInput)
     {
         int result = 0;
+        //Debug.LogWarning(jokeInput);
         for (int i = 0; i < bestJoke.Count; i++)
         {
             if (jokeInput[i] == bestJoke[i])
@@ -43,19 +44,26 @@ public class GameManager : StateController
             }
         }
 
-        ToggleCamera();
-        StartCoroutine("ToggleCameraAfterSeconds", 5);
-        //WaitForSeconds(5)
+        uiController.StartDialogue(jokeController.GetJokeList(jokeInput));
 
         uiController.ProgressBar.value = result;
-        Debug.LogWarning("RESULT _" + result.ToString());
+        //Debug.LogWarning("RESULT _" + result.ToString());
     }
 
+    public void SetActiveJokeCamera(bool value)
+    {
+        scenarioCamera.enabled = !value;
+        jokeCamera.enabled = value;
+    }
+
+    public void SetActiveInputPanel(bool value) 
+    {
+        uiController.SetActiveInputPanel(value);
+    }
     public void ToggleCamera() 
     {
         scenarioCamera.enabled = !scenarioCamera.enabled;
         jokeCamera.enabled = !jokeCamera.enabled;
-        uiController.ToggleInputPanel();
     }
 
     IEnumerator ToggleCameraAfterSeconds(int value) 
