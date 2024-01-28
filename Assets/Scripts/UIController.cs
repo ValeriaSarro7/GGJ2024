@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
     public GameObject InputPanel;
     public ProgressBar ProgressBar;
     public DialogueSystem dialogueBox;
-
+    
     public TMP_Text triesText;
 
     public GameObject gameOverScreen;
