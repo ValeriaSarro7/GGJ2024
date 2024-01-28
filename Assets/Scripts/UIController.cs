@@ -8,7 +8,9 @@ public class UIController : MonoBehaviour
 {
     public List<CustomButton> ButtonList = new List<CustomButton>();
     public List<CustomSquare> SquareList = new List<CustomSquare>();
+    public List<CustomSquare> SquareList2 = new List<CustomSquare>();
     public List<JokeCategory> Joke = new List<JokeCategory>();
+    public List<JokeCategory> Joke2 = new List<JokeCategory>();
     public Button SubmitButton;
     public Button DeleteButton;
     public GameObject InputPanel;
@@ -38,6 +40,15 @@ public class UIController : MonoBehaviour
         {
             Joke.Add(jokeCategory);
             SquareList[index].ChangeColor(jokeCategory);
+            Joke2.Add(jokeCategory);
+        }
+    }
+
+      public void AddJokesLog()
+    {
+        for(int i = 0; i < Joke2.Count; i++)
+        {
+            SquareList2[i].ChangeColor(Joke2[i]);
         }
     }
 
@@ -48,6 +59,7 @@ public class UIController : MonoBehaviour
         {
             SquareList[index].ChangeColor(JokeCategory.None);
             Joke.RemoveAt(index);
+            Joke2.RemoveAt(index);
         }
     }
 
@@ -67,6 +79,7 @@ public class UIController : MonoBehaviour
         {
             GameManager gameManager = (GameManager)GameManager.instance;
             gameManager.OnSubmit(Joke);
+            AddJokesLog();
             DeleteAll();
         
             return Joke;
