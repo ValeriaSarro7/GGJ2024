@@ -9,6 +9,8 @@ public class GameManager : StateController
 {
     public int maxTries = 10;
     public int currentTries = 10;
+    public AudioSource music;
+
 
     public AudioManager audioManager;
     public CrowdController crowdController;
@@ -62,7 +64,7 @@ public class GameManager : StateController
         {
             youWin = true;
         }
-        else if (currentTries < 0)
+        else if (currentTries <= 0)
         {
             uiController.SetActiveGameOverScreen(true);
         }
