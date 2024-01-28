@@ -81,6 +81,12 @@ public class DialogueSystem : MonoBehaviour
             boxGameObject.SetActive(true);
             ClearText();
             ToggleBox();
+
+            if (gameManager.youWin)
+            {
+                gameManager.uiController.SetActiveWinScreen(true);
+                gameManager.youWin = false;
+            }
         }
     }
 }

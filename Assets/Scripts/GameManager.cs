@@ -21,6 +21,7 @@ public class GameManager : StateController
     public CinemachineBrain cinemachineBrain;
     List<JokeCategory> bestJoke = null;
 
+    public bool youWin = false;
 
     private void Update()
     {
@@ -58,8 +59,11 @@ public class GameManager : StateController
                 result += 1;
             }
         }
-
-        if (currentTries < 0)
+        if (result >= 6 ) 
+        {
+            youWin = true;
+        }
+        else if (currentTries < 0)
         {
             uiController.SetActiveGameOverScreen(true);
         }
