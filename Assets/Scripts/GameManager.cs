@@ -47,7 +47,6 @@ public class GameManager : StateController
     public void OnSubmit(List<JokeCategory> jokeInput)
     {
         int result = 0;
-        //Debug.LogWarning(jokeInput);
         for (int i = 0; i < bestJoke.Count; i++)
         {
             if (jokeInput[i] == bestJoke[i])
