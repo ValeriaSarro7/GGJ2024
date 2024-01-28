@@ -20,7 +20,7 @@ public class CustomSquare : MonoBehaviour
     {
         
     }
-    public void changeColor(JokeCategory jokeCategory)
+    public void ChangeColor(JokeCategory jokeCategory)
     {
         image1.SetActive(false);
         image2.SetActive(false);

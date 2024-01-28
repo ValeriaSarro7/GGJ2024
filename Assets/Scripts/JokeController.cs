@@ -22,7 +22,7 @@ public class JokeController : MonoBehaviour
     public string GetFullJoke(JokeCategory introCategory, JokeCategory middleCategory, JokeCategory finalCategory) 
     {
         string result = "";
-        result = GetJokeSectionByIndex(1, introCategory) + GetJokeSectionByIndex(2, middleCategory) + GetJokeSectionByIndex(3, finalCategory); 
+        result = GetJokeSectionByIndex(1, introCategory)+ " " + GetJokeSectionByIndex(2, middleCategory) + " " + GetJokeSectionByIndex(3, finalCategory); 
         return result;
     }
 
@@ -67,7 +67,7 @@ public class JokeController : MonoBehaviour
         finalJokesDictionary.Add(JokeCategory.INFORMATICOS, new List<string>());
         finalJokesDictionary.Add(JokeCategory.BLANCOS, new List<string>());
 
-        var dataset = Resources.Load<TextAsset>("JokesTable");
+        var dataset = Resources.Load<TextAsset>("JokesTable3");
         string[] dataLines = dataset.text.Split('\n');
 
         for (int i = 1; i < dataLines.Length; i++)
